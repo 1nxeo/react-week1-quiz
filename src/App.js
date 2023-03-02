@@ -22,7 +22,7 @@ function App() {
     <div>
       <form className="form" onSubmit={todoSubmitHandler}>
         <input type="text" value={title} onChange={titleChangeHandler} />
-        <input type="submit" />
+        <input type="submit" value="추가하기"/>
       </form>
       <header>
         <h1>Todo List</h1>
