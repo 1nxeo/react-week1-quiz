@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
+  const [title, setTitle] = useState("");
+
+  const titleChangeHandler = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const todoSubmitHandler = (e) => {
+    const newTodo = {
+      title,
+    };
+    e.preventDefault();
+    setTodoList([...todoList, newTodo]);
+    setTitle("");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <form className="form" onSubmit={todoSubmitHandler}>
+        <input type="text" value={title} onChange={titleChangeHandler} />
+        <input type="submit" />
+      </form>
+      <header>
+        <h1>Todo List</h1>
       </header>
+      <main className="todo-list">
+        {todoList.map((item) => {
+          return (
+            <div className="todo-box">
+              <p>{item.title}</p>
+            </div>
+          );
+        })}
+      </main>
     </div>
   );
 }
